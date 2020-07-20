@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let words = ["яблоко", "планшет", "автоматизация", "телефон", "напиток"];
+      let selectedWord = words[Math.floor(Math.random() * words.length)];
+      let remainingLetters = selectedWord.length;
+      let tryCount = Math.floor(selectedWord.length / 2);
+      //let answerArray = selectedWord.match(/.{1}/g);
+
+      let answerArray = [];
+      for (var i = 0; i < selectedWord.length; i++) {
+        answerArray[i] = "_";
+      }
+
+      // let selectedWordInLettersArray = [];
+      //  for (var n = 0; n < selectedWord.length; n++) {
+      //    selectedWordInLettersArray[n] = selectedWord[n];
+      // }
+
+      while (remainingLetters > 0 && tryCount > 0) {
+        alert(
+          "Ваше слово состоит из " +
+            selectedWord.length +
+            " букв: " +
+            answerArray.join(" ")
+        );
+        var guess = prompt(
+          "Угадайте букву, или нажмите Отмена для выхода из игры."
+        );
+        guess = guess.toLowerCase();
+        if (guess === null) {
+          break;
+        } else if (guess.length !== 1) {
+          alert("Пожалуйста, введите одиночную букву.");
+        } else {
+          //   selectedWordInLettersArray.findIndex(function=>{ return ()});
+
+          for (var j = 0; j < selectedWord.length; j++) {
+            if (selectedWord[j] === guess && answerArray[j] === "_") {
+              answerArray[j] = guess;
+              remainingLetters--;
+              
+            } else {
+              alert("Вы уже использовали эту букву.");
+            }
+            break;
+          }
+        }
+        tryCount--;
+      }
+      alert(answerArray.join(" "));
+      alert("Отлично! Было загадано слово " + selectedWord);
+    </script>
+  </body>
+</html>
